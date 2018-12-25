@@ -35,6 +35,8 @@ ball.shape("square")
 ball.color("white")
 ball.penup()
 ball.goto(0,0)
+ball.dx = 0.05
+ball.dy = 0.05
 
 def pad_a_up():
     y = pad_a.ycor()
@@ -64,3 +66,25 @@ win.onkeypress(pad_b_down,"Down")
 
 while True:
     win.update()
+    ball.setx(ball.xcor() + ball.dx)
+    ball.sety(ball.ycor() + ball.dy)
+
+    if ball.ycor() > 290 :
+        ball.sety(290)
+        ball.dy *= -1
+    
+    if ball.ycor() < -290 :
+        ball.sety(-290)
+        ball.dy *= -1
+    
+    if ball.xcor() > 390 or ball.xcor() < -390:
+        ball.goto(0,0)
+        ball.dx *= -1
+    
+    if (ball.xcor() > 340 and ball.xcor() < 350) and ball.ycor() < pad_b.ycor() + 50 and ball.ycor() > pad_b.ycor() - 50 :
+        ball.setx(340)
+        ball.dx *= -1
+
+    if (ball.xcor() < -340 and ball.xcor() > -350) and ball.ycor() < pad_a.ycor() + 50 and ball.ycor() > pad_a.ycor() - 50 :
+        ball.setx(-340)
+        ball.dx *= -1
