@@ -38,6 +38,19 @@ ball.goto(0,0)
 ball.dx = 0.05
 ball.dy = 0.05
 
+# Score
+score_a = 0
+score_b = 0
+
+# score context
+pen = turtle.Turtle()
+pen.speed(0)
+pen.color("white")
+pen.penup()
+pen.hideturtle()
+pen.goto(0,260)
+pen.write("Player A : "+ str(score_a) +" Player B : "+ str(score_b),align="center",font=("Courier",24,"normal"))
+
 def pad_a_up():
     y = pad_a.ycor()
     y += 20
@@ -77,9 +90,20 @@ while True:
         ball.sety(-290)
         ball.dy *= -1
     
-    if ball.xcor() > 390 or ball.xcor() < -390:
+    if ball.xcor() > 390 :
+        score_a += 1
         ball.goto(0,0)
         ball.dx *= -1
+        pen.clear()
+        pen.write("Player A : "+ str(score_a) +" Player B : "+ str(score_b),align="center",font=("Courier",24,"normal"))
+    
+    if ball.xcor() < -390 :
+        score_b += 1
+        ball.goto(0,0)
+        ball.dx *= -1
+        pen.clear()
+        pen.write("Player A : "+ str(score_a) +" Player B : "+ str(score_b),align="center",font=("Courier",24,"normal"))
+
     
     if (ball.xcor() > 340 and ball.xcor() < 350) and ball.ycor() < pad_b.ycor() + 50 and ball.ycor() > pad_b.ycor() - 50 :
         ball.setx(340)
